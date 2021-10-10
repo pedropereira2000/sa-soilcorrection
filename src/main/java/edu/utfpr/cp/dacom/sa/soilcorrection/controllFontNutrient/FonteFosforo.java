@@ -1,4 +1,4 @@
-package edu.utfpr.cp.dacom.sa.soilcorrection;
+package edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient;
 
 import java.util.Set;
 
@@ -14,7 +14,7 @@ public enum FonteFosforo
         0.18, 
         Set.of(
             new NutrienteAdicional(
-                NomeNutrienteAdicional.ENXOFRE, 0.1), 
+                NomeNutrienteAdicional.ENXOFRE, 0.1),
                 new NutrienteAdicional(NomeNutrienteAdicional.CALCIO, 0.28))),
     SUPERFOSFATO_TRIPO(
         0.41, 

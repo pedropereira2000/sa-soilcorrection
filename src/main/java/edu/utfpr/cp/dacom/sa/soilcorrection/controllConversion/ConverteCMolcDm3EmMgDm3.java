@@ -1,5 +1,6 @@
-package edu.utfpr.cp.dacom.sa.soilcorrection;
+package edu.utfpr.cp.dacom.sa.soilcorrection.controllConversion;
 
+import edu.utfpr.cp.dacom.sa.soilcorrection.controllConversion.Conversao;
 import lombok.NonNull;
 
 public class ConverteCMolcDm3EmMgDm3 

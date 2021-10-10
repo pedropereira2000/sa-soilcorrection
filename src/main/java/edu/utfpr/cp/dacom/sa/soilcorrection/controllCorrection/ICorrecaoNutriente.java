@@ -1,4 +1,7 @@
-package edu.utfpr.cp.dacom.sa.soilcorrection;
+package edu.utfpr.cp.dacom.sa.soilcorrection.controllCorrection;
+
+import edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.IFonteNutriente;
+import edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.NutrienteAdicional;
 
 import java.util.Set;
 
