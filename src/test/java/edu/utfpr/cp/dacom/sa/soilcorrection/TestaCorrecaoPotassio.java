@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import edu.utfpr.cp.dacom.sa.soilcorrection.controllConversion.ConverteCMolcDm3EmMgDm3;
 import edu.utfpr.cp.dacom.sa.soilcorrection.controllConversion.ConverteKgHaEmK2O;
 import edu.utfpr.cp.dacom.sa.soilcorrection.controllCorrection.CorrecaoPotassio;
-import edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.FontePotassio;
+import edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.font.FontePotassio;
 import org.junit.jupiter.api.Test;
 
 public class TestaCorrecaoPotassio {

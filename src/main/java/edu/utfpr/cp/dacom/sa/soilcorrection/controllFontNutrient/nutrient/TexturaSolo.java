@@ -1,4 +1,4 @@
-package edu.utfpr.cp.dacom.sa.soilcorrection.controllOthers;
+package edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.nutrient;
 
 public enum TexturaSolo {
     

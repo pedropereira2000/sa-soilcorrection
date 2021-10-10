@@ -1,6 +1,6 @@
 package edu.utfpr.cp.dacom.sa.soilcorrection.controllCorrection;
 
-import edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.FontePotassio;
+import edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.font.*;
 
 public class CorrecaoPotassio
         implements

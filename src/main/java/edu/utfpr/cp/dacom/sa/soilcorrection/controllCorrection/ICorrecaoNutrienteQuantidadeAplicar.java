@@ -1,6 +1,6 @@
 package edu.utfpr.cp.dacom.sa.soilcorrection.controllCorrection;
 
-import edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.IFonteNutriente;
+import edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.font.*;
 
 public interface ICorrecaoNutrienteQuantidadeAplicar<T extends IFonteNutriente> {
     

@@ -1,13 +1,14 @@
-package edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient;
+package edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.font;
 
 import java.util.Set;
 
+import edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.nutrient.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public enum FonteFosforo 
+public enum FonteFosforo
         implements IFonteNutriente {
 
     SUPERFOSFATO_SIMPLES(
