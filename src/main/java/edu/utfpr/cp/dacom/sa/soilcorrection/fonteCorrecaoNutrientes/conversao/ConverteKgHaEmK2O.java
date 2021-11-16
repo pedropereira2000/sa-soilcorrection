@@ -1,6 +1,6 @@
-package edu.utfpr.cp.dacom.sa.soilcorrection.controllConversion;
+package edu.utfpr.cp.dacom.sa.soilcorrection.fonteCorrecaoNutrientes.conversao;
 
-import edu.utfpr.cp.dacom.sa.soilcorrection.controllConversion.Conversao;
+import edu.utfpr.cp.dacom.sa.soilcorrection.fonteCorrecaoNutrientes.conversao.Conversao;
 import lombok.NonNull;
 
 public class ConverteKgHaEmK2O 

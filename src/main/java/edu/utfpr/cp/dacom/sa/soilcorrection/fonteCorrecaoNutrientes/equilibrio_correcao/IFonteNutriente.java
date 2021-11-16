@@ -1,6 +1,5 @@
-package edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.font;
+package edu.utfpr.cp.dacom.sa.soilcorrection.fonteCorrecaoNutrientes.equilibrio_correcao;
 
-import edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.nutrient.*;
 
 import java.util.Set;
 

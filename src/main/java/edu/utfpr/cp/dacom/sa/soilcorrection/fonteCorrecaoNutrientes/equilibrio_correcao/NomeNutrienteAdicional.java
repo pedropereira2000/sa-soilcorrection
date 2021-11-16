@@ -1,4 +1,4 @@
-package edu.utfpr.cp.dacom.sa.soilcorrection.controllFontNutrient.nutrient;
+package edu.utfpr.cp.dacom.sa.soilcorrection.fonteCorrecaoNutrientes.equilibrio_correcao;
 
 public enum NomeNutrienteAdicional {
     ENXOFRE,
