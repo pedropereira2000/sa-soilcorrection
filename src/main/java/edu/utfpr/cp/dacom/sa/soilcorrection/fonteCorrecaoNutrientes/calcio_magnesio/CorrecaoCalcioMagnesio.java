@@ -1,6 +1,5 @@
 package edu.utfpr.cp.dacom.sa.soilcorrection.fonteCorrecaoNutrientes.calcio_magnesio;
 
-import edu.utfpr.cp.dacom.sa.soilcorrection.fonteCorrecaoNutrientes.calcio_magnesio.FonteCalcioMagnesio;
 import edu.utfpr.cp.dacom.sa.soilcorrection.fonteCorrecaoNutrientes.equilibrio_correcao.ICorrecaoNutriente;
 
 public class CorrecaoCalcioMagnesio

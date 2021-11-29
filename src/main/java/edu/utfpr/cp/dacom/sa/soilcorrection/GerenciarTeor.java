@@ -2,30 +2,89 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package edu.utfpr.cp.dacom.sa.soilcorrection.fonteCorrecaoNutrientes;
+package edu.utfpr.cp.dacom.sa.soilcorrection;
     
+import edu.utfpr.cp.dacom.sa.soilcorrection.fonteCorrecaoNutrientes.equilibrio_correcao.NutrientesCTC;
+import edu.utfpr.cp.dacom.sa.soilcorrection.fonteCorrecaoNutrientes.equilibrio_correcao.TexturaSolo;
+import java.text.DecimalFormat;
+
 /**
  *
  * @author pedropereira
  */
 public class GerenciarTeor extends javax.swing.JFrame {
-    /*private ControleFosforo controlF = new ControleFosforo();
-    private ControlePotassio controlP = new ControlePotassio();
-    private ControleCalcioMagnesio controlCM = new ControleCalcioMagnesio();
-    private ControleOutrasFontes controlOther = new ControleOutrasFontes();*/
     public static int texturaSolo = 0;
+    public static String tipoSolo = "";
+    public static String descTipoSolo = "";
+    public static Double areaTotal = 0.0;
+    public static Double areaTalhao = 0.0;
+    public static int sistemaCultivo = 0;
+    public static String descSistemaCultivo = "";
+    public static int profundidadeSolo = 0;
+    public static Double fosforo = 0.0;
+    public static Double potassio = 0.0;
+    public static Double calcio = 0.0;
+    public static Double magnesio = 0.0;
+    public static Double enxofre = 0.0;
+    public static Double aluminio = 0.0;
+    public static Double hAl = 0.0;
+    public static Double mo = 0.0;
+    public static Double magnesioPosCorr = 0.0;
+    
+    EquilibrioCorrecaoCTC eqCorrCTC = new EquilibrioCorrecaoCTC();
+    
+    NutrientesCTC nutCTC;
+
+    /*public void defPosCorrecao(){
+        lblMagnesioPosCorrecao.setText(magnesio+);
+    }*/
+    
+    public void defTexturaIdealSolo(){
+        if(texturaSolo==1){
+            TexturaSolo txSolo = Enum.valueOf(TexturaSolo.class, "ARGILOSO");
+            NutrientesCTC nutCTCIdeal=txSolo.calculaValorIdeal();
+            lblFosforoIdeal.setText(String.valueOf(nutCTCIdeal.fosforo()));
+            lblPotassioIdeal.setText(String.valueOf(nutCTCIdeal.potassio()));
+            lblCalcioIdeal.setText(String.valueOf(nutCTCIdeal.calcio()));
+            lblMagnesioIdeal.setText(String.valueOf(nutCTCIdeal.magnesio()));
+            magnesioPosCorr = nutCTCIdeal.magnesio();
+            lblEnxofreIdeal.setText(String.valueOf(nutCTCIdeal.enxofre()));
+            lblAluminioIdeal.setText(String.valueOf(nutCTCIdeal.aluminio()));
+        }else if(texturaSolo==2){
+            TexturaSolo txSolo = Enum.valueOf(TexturaSolo.class, "TEXTURA_MEDIA");
+            NutrientesCTC nutCTCIdeal=txSolo.calculaValorIdeal();
+            lblFosforoIdeal.setText(String.valueOf(nutCTCIdeal.fosforo()));
+            lblPotassioIdeal.setText(String.valueOf(nutCTCIdeal.potassio()));
+            lblCalcioIdeal.setText(String.valueOf(nutCTCIdeal.calcio()));
+            lblMagnesioIdeal.setText(String.valueOf(nutCTCIdeal.magnesio()));
+            lblEnxofreIdeal.setText(String.valueOf(nutCTCIdeal.enxofre()));
+            lblAluminioIdeal.setText(String.valueOf(nutCTCIdeal.aluminio()));
+        }
+    }
+    
+    public void atualizaCampos(){
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+        lblScmol.setText(String.valueOf(numberFormat.format(eqCorrCTC.calculaSCmol(potassio, calcio, magnesio)).replace("," , ".")));
+        lblCtccmol.setText(String.valueOf(numberFormat.format(eqCorrCTC.calculaCTCCmol(potassio, calcio, magnesio, aluminio+hAl)).replace("," , ".")));
+        lblVatual.setText(String.valueOf(numberFormat.format(eqCorrCTC.calculaVPercentual(Double.parseDouble(lblScmol.getText()), Double.parseDouble(lblCtccmol.getText()))).replace("," , ".")));
+        lblMOPercent.setText(String.valueOf(numberFormat.format(eqCorrCTC.calculaMOPercentual(mo)).replace("," , ".")));
+        lblCarbono.setText(String.valueOf(numberFormat.format(eqCorrCTC.calculaCarbono(Double.parseDouble(lblMOPercent.getText()))).replace("," , ".")));
+    }
     /**
      * Creates new form GerenciarTeor
      */
     public GerenciarTeor() {
         initComponents();
-        texturaSolo = EquilibrioCorrecaoCTC.texturaSolo;
-        /*lblFosforoIdeal.setText(String.valueOf(controlF.fosforoIdeal(texturaSolo)));
-        lblCalcioIdeal.setText(String.valueOf(controlCM.calcioIdeal(texturaSolo)));
-        lblMagnesioIdeal.setText(String.valueOf(controlCM.magnesioIdeal(texturaSolo)));
-        lblPotassioIdeal.setText(controlP.potassioIdeal(texturaSolo));
-        lblEnxofreIdeal.setText(String.valueOf(controlOther.enxofreIdeal(texturaSolo)));*/
-        
+        texturaSolo = GerenciarEquilibrioCorrecaoCTC.texturaSolo;
+        tipoSolo = GerenciarEquilibrioCorrecaoCTC.tipoSolo;
+        descTipoSolo = GerenciarEquilibrioCorrecaoCTC.descTipoSolo;
+        areaTotal = GerenciarEquilibrioCorrecaoCTC.areaTotal;
+        areaTalhao = GerenciarEquilibrioCorrecaoCTC.areaTalhao;
+        sistemaCultivo = GerenciarEquilibrioCorrecaoCTC.sistemaCultivo;
+        descSistemaCultivo = GerenciarEquilibrioCorrecaoCTC.descSistemaCultivo;
+        profundidadeSolo = GerenciarEquilibrioCorrecaoCTC.profundidadeSolo;
+        atualizaCampos();
+        defTexturaIdealSolo();
     }
 
     /**
@@ -128,9 +187,7 @@ public class GerenciarTeor extends javax.swing.JFrame {
         jSeparator39 = new javax.swing.JSeparator();
         jSeparator40 = new javax.swing.JSeparator();
         jSeparator41 = new javax.swing.JSeparator();
-        txtItemCalc1 = new javax.swing.JTextField();
         txtMOgdm3 = new javax.swing.JTextField();
-        txtK17 = new javax.swing.JTextField();
         jSeparator36 = new javax.swing.JSeparator();
         jPanel14 = new javax.swing.JPanel();
         jSeparator42 = new javax.swing.JSeparator();
@@ -142,19 +199,21 @@ public class GerenciarTeor extends javax.swing.JFrame {
         lblValMOPercente = new javax.swing.JLabel();
         lblMOPercent = new javax.swing.JLabel();
         lblTipoVal2 = new javax.swing.JLabel();
-        lblVal3 = new javax.swing.JLabel();
+        lblCarbono = new javax.swing.JLabel();
         lblTipoMogdm3 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jSeparator47 = new javax.swing.JSeparator();
         jSeparator48 = new javax.swing.JSeparator();
         jSeparator49 = new javax.swing.JSeparator();
         lblVal4 = new javax.swing.JLabel();
-        lblTipo2MOgdm3 = new javax.swing.JLabel();
         lblVal5 = new javax.swing.JLabel();
         lblVal6 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -516,9 +575,50 @@ public class GerenciarTeor extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(153, 153, 153));
 
+        txtFosforo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFosforoFocusLost(evt);
+            }
+        });
+
+        txtPotassio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPotassioFocusLost(evt);
+            }
+        });
+
+        txtCalcio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCalcioFocusLost(evt);
+            }
+        });
+
+        txtMagnesio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtMagnesioFocusLost(evt);
+            }
+        });
         txtMagnesio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMagnesioActionPerformed(evt);
+            }
+        });
+
+        txtEnxofre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEnxofreFocusLost(evt);
+            }
+        });
+
+        txtAluminio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtAluminioFocusLost(evt);
+            }
+        });
+
+        txtHAl.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtHAlFocusLost(evt);
             }
         });
 
@@ -866,12 +966,6 @@ public class GerenciarTeor extends javax.swing.JFrame {
             }
         });
 
-        txtK17.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtK17FocusLost(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -885,17 +979,13 @@ public class GerenciarTeor extends javax.swing.JFrame {
                 .addComponent(txtMOgdm3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addComponent(jSeparator38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addComponent(txtItemCalc1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(113, 113, 113)
                 .addComponent(jSeparator39, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(100, 100, 100)
                 .addComponent(jSeparator40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(90, 90, 90)
                 .addComponent(jSeparator41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(txtK17, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(119, 119, 119))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -912,14 +1002,8 @@ public class GerenciarTeor extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel31))
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(txtItemCalc1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(txtMOgdm3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(txtK17, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtMOgdm3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -961,8 +1045,8 @@ public class GerenciarTeor extends javax.swing.JFrame {
         lblTipoVal2.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         lblTipoVal2.setText("Carbono");
 
-        lblVal3.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        lblVal3.setText("17,84");
+        lblCarbono.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        lblCarbono.setText("17,84");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -990,7 +1074,7 @@ public class GerenciarTeor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator46, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
-                .addComponent(lblVal3)
+                .addComponent(lblCarbono)
                 .addGap(30, 30, 30))
         );
         jPanel14Layout.setVerticalGroup(
@@ -1008,7 +1092,7 @@ public class GerenciarTeor extends javax.swing.JFrame {
                             .addComponent(lblVal1)
                             .addComponent(lblMOPercent)
                             .addComponent(lblTipoVal2)
-                            .addComponent(lblVal3))
+                            .addComponent(lblCarbono))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -1036,8 +1120,6 @@ public class GerenciarTeor extends javax.swing.JFrame {
         lblVal4.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         lblVal4.setText("0,00");
 
-        lblTipo2MOgdm3.setText("jLabel17");
-
         lblVal5.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
 
         lblVal6.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
@@ -1047,9 +1129,7 @@ public class GerenciarTeor extends javax.swing.JFrame {
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(lblTipo2MOgdm3)
-                .addGap(81, 81, 81)
+                .addGap(195, 195, 195)
                 .addComponent(jSeparator47, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
                 .addComponent(lblVal4)
@@ -1074,9 +1154,6 @@ public class GerenciarTeor extends javax.swing.JFrame {
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblTipo2MOgdm3))
                     .addComponent(lblVal5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(lblVal4)
@@ -1118,6 +1195,20 @@ public class GerenciarTeor extends javax.swing.JFrame {
                     .addComponent(jLabel40))
                 .addContainerGap())
         );
+
+        jMenu1.setText("Gerenciar Fonte");
+
+        jMenuItem1.setText("Fontes");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1228,18 +1319,60 @@ public class GerenciarTeor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMOgdm3InputMethodTextChanged
 
     private void txtMOgdm3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMOgdm3FocusLost
-        /*lblMOPercent.setText(String.valueOf(controlOther.calcMOPercent(Double.parseDouble((txtMOgdm3.getText()).replaceAll(",",".")))));
-        lblValMOPercente.setText(String.valueOf(controlOther.calcMOPercent(Double.parseDouble(lblMOPercent.getText()))));
-        lblTipoMogdm3.setText(String.valueOf(controlOther.calcVal2MOgdm3(Double.parseDouble(lblVal1.getText()))));
-        lblTipo2MOgdm3.setText(String.valueOf(controlOther.calcVal4MOgdm3(Double.parseDouble(lblVal1.getText()))));
-        lblVal4.setText(String.valueOf(controlOther.calcVal3MOgdm3(Double.parseDouble(lblVal1.getText()))));
-        lblVal3.setText(String.valueOf(controlOther.calcCarbono(Double.parseDouble(lblValMOPercente.getText()))));*/
+        if(!txtMOgdm3.getText().equals(""))mo = Double.parseDouble(txtMOgdm3.getText().replace("," , "."));
+        else mo = 0.0;
+        atualizaCampos();
     }//GEN-LAST:event_txtMOgdm3FocusLost
 
-    private void txtK17FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtK17FocusLost
-        //lblVal5.setText(controlOther.calcValK17(Double.parseDouble(txtK17.getText())));
-        //lblVal6.setText(String.valueOf(controlOther.calcP18(Double.parseDouble(txtK17.getText()))));
-    }//GEN-LAST:event_txtK17FocusLost
+    private void txtFosforoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFosforoFocusLost
+        if(!txtFosforo.getText().equals("")) fosforo = Double.parseDouble(txtFosforo.getText().replace("," , "."));
+        else fosforo = 0.0;
+        atualizaCampos();
+    }//GEN-LAST:event_txtFosforoFocusLost
+
+    private void txtPotassioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPotassioFocusLost
+        if(!txtPotassio.getText().equals("")) potassio = Double.parseDouble(txtPotassio.getText().replace("," , "."));
+        else potassio = 0.0;
+        atualizaCampos();
+    }//GEN-LAST:event_txtPotassioFocusLost
+
+    private void txtCalcioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCalcioFocusLost
+        if(!txtCalcio.getText().equals("")) calcio = Double.parseDouble(txtCalcio.getText().replace("," , "."));
+        else calcio = 0.0;
+        atualizaCampos();
+    }//GEN-LAST:event_txtCalcioFocusLost
+
+    private void txtMagnesioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMagnesioFocusLost
+        if(!txtMagnesio.getText().equals("")) magnesio = Double.parseDouble(txtMagnesio.getText().replace("," , "."));
+        else magnesio = 0.0;
+        atualizaCampos();
+    }//GEN-LAST:event_txtMagnesioFocusLost
+
+    private void txtEnxofreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEnxofreFocusLost
+        if(!txtEnxofre.getText().equals("")) enxofre = Double.parseDouble(txtEnxofre.getText().replace("," , "."));
+        else enxofre = 0.0;
+        atualizaCampos();
+    }//GEN-LAST:event_txtEnxofreFocusLost
+
+    private void txtAluminioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAluminioFocusLost
+        if(!txtAluminio.getText().equals("")) aluminio = Double.parseDouble(txtAluminio.getText().replace("," , "."));
+        aluminio = 0.0;
+        atualizaCampos();
+    }//GEN-LAST:event_txtAluminioFocusLost
+
+    private void txtHAlFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtHAlFocusLost
+        if(!txtHAl.getText().equals("")) hAl = Double.parseDouble(txtHAl.getText().replace("," , "."));
+        else hAl = 0.0;
+        atualizaCampos();
+    }//GEN-LAST:event_txtHAlFocusLost
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GerenciarFontes().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1299,6 +1432,9 @@ public class GerenciarTeor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1366,6 +1502,7 @@ public class GerenciarTeor extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lblAluminioIdeal;
     private javax.swing.JLabel lblCalcioIdeal;
+    private javax.swing.JLabel lblCarbono;
     private javax.swing.JLabel lblCtccmol;
     private javax.swing.JLabel lblEnxofreIdeal;
     private javax.swing.JLabel lblFosforoIdeal;
@@ -1375,11 +1512,9 @@ public class GerenciarTeor extends javax.swing.JFrame {
     private javax.swing.JLabel lblPotassioIdeal;
     private javax.swing.JLabel lblPotassioPosCorrecao;
     private javax.swing.JLabel lblScmol;
-    private javax.swing.JLabel lblTipo2MOgdm3;
     private javax.swing.JLabel lblTipoMogdm3;
     private javax.swing.JLabel lblTipoVal2;
     private javax.swing.JLabel lblVal1;
-    private javax.swing.JLabel lblVal3;
     private javax.swing.JLabel lblVal4;
     private javax.swing.JLabel lblVal5;
     private javax.swing.JLabel lblVal6;
@@ -1390,8 +1525,6 @@ public class GerenciarTeor extends javax.swing.JFrame {
     private javax.swing.JTextField txtEnxofre;
     private javax.swing.JTextField txtFosforo;
     private javax.swing.JTextField txtHAl;
-    private javax.swing.JTextField txtItemCalc1;
-    private javax.swing.JTextField txtK17;
     private javax.swing.JTextField txtMOgdm3;
     private javax.swing.JTextField txtMagnesio;
     private javax.swing.JTextField txtPotassio;

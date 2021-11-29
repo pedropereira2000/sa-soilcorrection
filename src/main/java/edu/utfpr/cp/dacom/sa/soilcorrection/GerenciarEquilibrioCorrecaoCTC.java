@@ -2,23 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package edu.utfpr.cp.dacom.sa.soilcorrection.fonteCorrecaoNutrientes;
-
-import java.util.ArrayList;
+package edu.utfpr.cp.dacom.sa.soilcorrection;
 
 /**
  *
  * @author pedropereira
  */
-public class EquilibrioCorrecaoCTC extends javax.swing.JFrame {
+public class GerenciarEquilibrioCorrecaoCTC extends javax.swing.JFrame {
     
     public static int texturaSolo = 1;
-   // private ControleOutrasFontes controleOutrasFontes = new ControleOutrasFontes();
-    private ArrayList tipoSolo=new ArrayList();
-    /**
-     * Creates new form EquilibrioCorrecaoCTC
-     */
-    public EquilibrioCorrecaoCTC() {
+    public static String tipoSolo = "";
+    public static String descTipoSolo = "";
+    public static Double areaTotal = 0.0;
+    public static Double areaTalhao = 0.0;
+    public static int sistemaCultivo = 0;
+    public static String descSistemaCultivo = "";
+    public static int profundidadeSolo = 0;
+
+    public GerenciarEquilibrioCorrecaoCTC() {
         initComponents();
     }
 
@@ -64,8 +65,6 @@ public class EquilibrioCorrecaoCTC extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mntTeor = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -165,18 +164,6 @@ public class EquilibrioCorrecaoCTC extends javax.swing.JFrame {
         jMenu1.add(mntTeor);
 
         jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Correção e Fonte");
-
-        jMenuItem1.setText("Gerenciar Fontes");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -319,6 +306,15 @@ public class EquilibrioCorrecaoCTC extends javax.swing.JFrame {
     }//GEN-LAST:event_txtProdutorActionPerformed
 
     private void mntTeorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntTeorActionPerformed
+        if(!txtAreaTotal.getText().equals("")&&!txtAreaTalhao.getText().equals("")&&!txtProfSolos.getText().equals("")) {
+            areaTotal = Double.parseDouble(txtAreaTotal.getText());
+            areaTalhao = Double.parseDouble(txtAreaTalhao.getText());
+            profundidadeSolo = Integer.parseInt(txtProfSolos.getText());
+        }else{
+            areaTotal = 0.0;
+            areaTalhao = 0.0;
+            profundidadeSolo = 0;
+        }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GerenciarTeor().setVisible(true);
@@ -332,22 +328,30 @@ public class EquilibrioCorrecaoCTC extends javax.swing.JFrame {
 
     private void cbxTexturaSoloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxTexturaSoloItemStateChanged
         texturaSolo=Integer.parseInt(cbxTexturaSolo.getSelectedItem().toString());
-        //tipoSolo = controleOutrasFontes.tipoSolo(texturaSolo);
-        lblTipoSolo.setText(String.valueOf(tipoSolo.get(0)));
-        lblArgiloso.setText(String.valueOf(tipoSolo.get(1)));
+        if(texturaSolo==1){
+            tipoSolo="Argiloso";
+            descTipoSolo="+ 40% de argila";
+            lblTipoSolo.setText(tipoSolo);
+            lblArgiloso.setText(descTipoSolo);
+        }else{
+            tipoSolo="Textura Média";
+            descTipoSolo="25 a 40% de argila";
+            lblTipoSolo.setText(tipoSolo);
+            lblArgiloso.setText(descTipoSolo);
+        }
+
     }//GEN-LAST:event_cbxTexturaSoloItemStateChanged
 
     private void cbxSistemaCultivoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxSistemaCultivoItemStateChanged
-        //lblTipoPlantio.setText(controleOutrasFontes.tipoPlantio(Integer.parseInt(cbxSistemaCultivo.getSelectedItem().toString())));
+        sistemaCultivo=(Integer.parseInt(cbxSistemaCultivo.getSelectedItem().toString()));
+        if(sistemaCultivo==1){
+            descSistemaCultivo="Plantio Direto";
+            lblTipoPlantio.setText(descSistemaCultivo);
+        }else{
+            descSistemaCultivo="Convencional";
+            lblTipoPlantio.setText(descSistemaCultivo);
+        }
     }//GEN-LAST:event_cbxSistemaCultivoItemStateChanged
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GerenciarFontes().setVisible(true);
-            }
-        });
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,20 +370,20 @@ public class EquilibrioCorrecaoCTC extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EquilibrioCorrecaoCTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciarEquilibrioCorrecaoCTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EquilibrioCorrecaoCTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciarEquilibrioCorrecaoCTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EquilibrioCorrecaoCTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciarEquilibrioCorrecaoCTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EquilibrioCorrecaoCTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciarEquilibrioCorrecaoCTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EquilibrioCorrecaoCTC().setVisible(true);
+                new GerenciarEquilibrioCorrecaoCTC().setVisible(true);
             }
         });
     }
@@ -403,9 +407,7 @@ public class EquilibrioCorrecaoCTC extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel lblArgiloso;
     private javax.swing.JLabel lblTipoPlantio;
     private javax.swing.JLabel lblTipoSolo;

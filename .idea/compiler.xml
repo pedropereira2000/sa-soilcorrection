@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="sa-soilcorrection" />
         <module name="soilcorrection" />
+        <module name="sa-soilcorrection-main" />
       </profile>
     </annotationProcessing>
   </component>

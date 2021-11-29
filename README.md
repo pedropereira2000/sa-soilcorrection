@@ -25,3 +25,17 @@ In addition, they practiced software testing, TDD, VCS with Git/Github, and soft
 ### As of September, 2021
 
 Less than 15 students actively worked on this project in its second cycle, started in June, 2021. Students learned to visualise static and dynamic components of the architecture by using UML class and sequence diagrams. They exercised Object-Oriented principles, like polymorphism and inheritance by examining the existent architecture. They practiced software reuse by adopting a common Java library. Finally, they used architectural principles to encapsulate classes into layers.
+
+### Demonstação da implantação
+
+><img src="./gifs/preenchendoTela1.gif">
+
+- Nessa Primeira tela são inseridas informações mais simples.
+
+><img src="./gifs/preenchendoTela2.gif">
+
+- Nessa Segunda tela são inseridas informações referêntes a os teores das substâncias utilizadas.
+
+><img src="./gifs/preenchendoTela3.gif">
+
+- Nessa Terceira tela são inseridas informações referênte as fontes fornecidas para as substâncias utilizadas.

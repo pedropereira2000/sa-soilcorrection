@@ -1,4 +1,4 @@
-package edu.utfpr.cp.dacom.sa.soilcorrection.fonteCorrecaoNutrientes.equilibrio_correcao;
+package edu.utfpr.cp.dacom.sa.soilcorrection;
 
 public class EquilibrioCorrecaoCTC {
 
